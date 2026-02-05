@@ -4,16 +4,16 @@ pkgs.mkShell {
   name = "java-dev-shell";
 
   buildInputs = with pkgs; [
-    ncurses
     gcc
     glibc.dev 
     stdenv.cc.libc
-
+    raylib
   ];
 
   shellHook = ''
-    codium .
+    echo "gcc main.c -o MySorter -lraylib -lm && ./MySorter" &&
+    codium . 
   '';
 }
 ### Ausführen: 
-# nix-shell
+# nix-shell myraylib.nix
