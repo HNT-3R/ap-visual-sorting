@@ -5,11 +5,10 @@ Dieses Softwareprojekt erlaubt die Visualisierung, Benchmarking und Vergleich vo
 
 Gehe in den source tree und führe folgenden Befehl im Terminal aus:
 ```
-gcc test.c -o test -lncurses && ./test
+gcc main.c -o MySorter -lraylib -lm && ./MySorter
 ```
 
 ## Hilfe
-- https://openbook.rheinwerk-verlag.de/linux_unix_programmierung/Kap13-002.htm
-- https://www.raylib.com/examples.html
-- https://www.raylib.com/cheatsheet/cheatsheet.html
-- https://www.geeksforgeeks.org/c/multithreading-in-c/
+- raylib beispiele:     https://www.raylib.com/examples.html
+- raylib funktionen:    https://www.raylib.com/cheatsheet/cheatsheet.html
+- threads:              https://www.geeksforgeeks.org/c/multithreading-in-c/
