@@ -124,14 +124,9 @@ int main(void) {
         case 1: 
             Rectangle dia = {0, 0, sWidth, sHeight};
             createDiagram(dia, &list);
-
-
-
+            break;
         }
         
-
-
-        //createDiagram(dia, &list);
         EndDrawing();
 
         
