@@ -12,15 +12,40 @@ typedef struct {
     bool isFinished;
 } List;
 
-#include "../ui/ui.h"
+typedef struct {
+    unsigned char id;
+    // 0 -> test
+    // 1 -> bubblesort
+    // 2 -> quicksort
+
+    char* name;
+    long time;
+    long accsesses; //listenzugriffe
+    long repeats; //iterationen / rekursionen
+    //speichernutzung / allokationen
+    //cpu auslastung
+
+    bool corect; //ist sortierung korekt?
+    bool stable; //ändert algorithmus reihenfolge gleicher elemente
+
+
+} MyAlgorithm;
 
 typedef struct {
-    int algoNum; //wie viele algorithmen zu sortieren
+    unsigned char algoNum; //wie viele algorithmen zu sortieren
+    unsigned char *algoList; //liste, welche algorithmen verwendet werden sollen
+
 
     int maxArrNum; //wie viele elemente in liste, und wie groß ist größtes element
     bool allDistinct; //alle unterschiedlich in unsortierter liste, oder egal
-    
+
 } SortStruct;
+
+
+
+#include "../ui/ui.h"
+
+
 
 
 
