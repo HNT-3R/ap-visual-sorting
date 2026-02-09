@@ -3,7 +3,6 @@
 #define CORE_H
 
 #include <stdlib.h>
-#include "../ui/ui.h"
 
 typedef struct {
     int dynLength;
@@ -13,6 +12,7 @@ typedef struct {
     bool isFinished;
 } List;
 
+#include "../ui/ui.h"
 
 typedef struct {
     int algoNum; //wie viele algorithmen zu sortieren
