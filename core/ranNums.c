@@ -14,7 +14,7 @@ void setAllDisctinctRanNums(int *p_nums, int max) {
     }
 
     //mischen
-    for (int i = ; i < max; i++) {
+    for (int i = 0; i < max; i++) {
         int temp = p_nums[i];
         int randI = myRanNum(max);
 

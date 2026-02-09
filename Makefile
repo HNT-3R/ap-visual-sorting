@@ -6,7 +6,7 @@ all: MySorter
 
 MySorter: $(SRC)
 	gcc $(SRC) -o MySorter $(LDFLAGS)
-	echo "Programm erstellt"ö
+	echo "Programm erstellt"
 
 run: MySorter
 	./MySorter

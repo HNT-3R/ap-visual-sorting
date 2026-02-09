@@ -6,14 +6,6 @@
 #include <stdio.h>
 
 typedef struct {
-    int dynLength;
-    int absLength;
-    int *nums;
-    int index;
-    bool isFinished;
-} List;
-
-typedef struct {
     Rectangle box;
     char* text;
 } Button;

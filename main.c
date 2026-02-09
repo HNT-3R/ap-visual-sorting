@@ -82,7 +82,7 @@ int main(void) {
     int num = mass;
     int *nums = calloc(num, sizeof(int));
 
-    setAllDisctinctRanNums(nums, mass);
+    setRanNums(nums, mass);
 
     pthread_t thread1;
     List list;
@@ -95,7 +95,7 @@ int main(void) {
     list.index = 0;
     list.isFinished = false;
 
-    SetConfigFlags(FLAG_WINDOW_MAXIMIZED | FLAG_WINDOW_RESIZABLE);
+    SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     InitWindow(sWidth, sHeight, "Diagramm Beispiel");
     SetTargetFPS(60); 
 

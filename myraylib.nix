@@ -1,7 +1,7 @@
 { pkgs ? import <nixpkgs> {} }:
 
 pkgs.mkShell {
-  name = "java-dev-shell";
+  name = "c-ap-dev-shell";
 
   buildInputs = with pkgs; [
     gcc

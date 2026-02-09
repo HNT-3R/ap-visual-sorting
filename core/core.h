@@ -5,6 +5,23 @@
 #include <stdlib.h>
 #include "../ui/ui.h"
 
+typedef struct {
+    int dynLength;
+    int absLength;
+    int *nums;
+    int index;
+    bool isFinished;
+} List;
+
+
+typedef struct {
+    int algoNum; //wie viele algorithmen zu sortieren
+
+    int maxArrNum; //wie viele elemente in liste, und wie groß ist größtes element
+    bool allDistinct; //alle unterschiedlich in unsortierter liste, oder egal
+    
+} SortStruct;
+
 
 
 void simpelSort(List* list);
