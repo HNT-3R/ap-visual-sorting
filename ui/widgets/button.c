@@ -17,16 +17,21 @@ void drawButton(Rectangle box, char* text, bool* isPressed) {
     }
     drawOutline(box, 4, FSTCOLOR);
     
-    //int fontSize = (box.height + box.width)
-    DrawText(text, box.x+6, box.y+2, ((box.height / 2)+(box.width-2)/200), FSTCOLOR);
+    int fontSize = 80;
+    int width = MeasureText(text, fontSize);
+    while (width > box.width-8) {
+        fontSize--;
+        width = MeasureText(text, fontSize);
+    }
+    DrawText(text, box.x+6, box.y, fontSize-4, FSTCOLOR);
 }
 
 void drawInputField(Rectangle box, char* input, int* letterCount) {
     drawOutline(box, 4, FSTCOLOR);
-    DrawText(input, box.x, box.y, 30, FSTCOLOR);
 
 
     if (CheckCollisionPointRec(GetMousePosition(), box)) {
+        DrawRectangleRec(box, SNDCOLOR);
         SetMouseCursor(MOUSE_CURSOR_IBEAM);
 
         int key = GetCharPressed();
@@ -49,6 +54,6 @@ void drawInputField(Rectangle box, char* input, int* letterCount) {
     } else {
         SetMouseCursor(MOUSE_CURSOR_DEFAULT);
     }
-
-    
+    drawOutline(box, 4, FSTCOLOR);
+    DrawText(input, box.x+6, box.y+2, 30, FSTCOLOR);    
 }

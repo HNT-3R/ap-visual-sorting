@@ -7,11 +7,22 @@ void drawSortChooser(int w, int h) {
     drawOutline(rec, 4, FSTCOLOR);
 }
 
-void drawOptChooser(int w, int h) {
+
+void drawTextInput(Rectangle rec, AppState* state) {
+    
+    
+    drawInputField(rec, state->numMaxInput, &state->letCount);
+}
+
+void drawOptChooser(int w, int h, AppState* state) {
     DrawText("choose list\nparameter", 8, (int) h/5*3, w/40, FSTCOLOR);
 
-    Rectangle rec = {0, ((int) h/5*3) - 4, ((int) w/4), h/5*2 + 4};
+    Rectangle rec = {0, h/5*3 - 4, w/4, h/5*2 + 4};
     drawOutline(rec, 4, FSTCOLOR);
+
+    DrawText("List size n:", 8, h/5*3.5f, w/40, FSTCOLOR);
+    Rectangle nRec = {8, h/5*3.68f, rec.width-16, w/36};
+    drawTextInput(nRec, state);
 }
 
 void drawStartButton(int w, int h, AppState* state) {
@@ -31,19 +42,15 @@ void drawStartButton(int w, int h, AppState* state) {
     }
 }
 
-void drawTextInput(Rectangle rec, AppState* state) {
-    
-    
-    drawInputField(rec, state->numMaxInput, &state->letCount);
-}
+
 
 void drawChooseUI(int w, int h, AppState* state) {
     drawSortChooser(w, h);
-    drawOptChooser(w, h);
+    drawOptChooser(w, h, state);
     drawStartButton(w, h, state);
 
-    Rectangle test = {350, 100, 300, 70};
-    drawTextInput(test, state);
+    
+    
 }
 
 
