@@ -41,6 +41,11 @@ void drawOptChooser(int w, int h, AppState* state) {
     drawOutline(options, 4, FSTCOLOR);
 }
 
+void* myThread(void* arg) {
+    MyAlgorithm* algo = (MyAlgorithm*) arg;
+    initSort(algo);
+}
+
 void drawStartButton(int w, int h, AppState* state) {
     int btnX = (int) w / 10 * 8;
     int btnY = (int) h / 20 * 18; 
@@ -55,6 +60,44 @@ void drawStartButton(int w, int h, AppState* state) {
     drawButton(btn, "start", &isPressed, (btn.height+(btn.width/2)) / 3);
     if (isPressed) {
         state->toDraw = 1;
+
+        state->algoNum = 1;
+
+        int mass = atoi(state->numMaxInput);
+        int *nums = calloc(mass, sizeof(int));
+
+        setRanNums(nums, mass);
+
+        state->algos[0].list->absLength = mass;
+        state->algos[0].list->dynLength = mass;
+
+        
+        
+        MyAlgorithm algo;
+
+        List srcList;
+        srcList.dynLength = mass;
+        srcList.absLength = mass;
+        srcList.nums = nums;
+        srcList.index = 0;
+        srcList.isFinished = false;
+
+
+        for(int i = 0; i < 1; i++) {
+            MyAlgorithm algo;
+            List list = srcList;
+            
+            algo.id = 3;
+            algo.list = &list;
+            algo.name = "MyName";
+            algo.accesses = 0;
+            algo.repeats = 0;
+            algo.correct = false;
+
+            pthread_t thread;
+            pthread_create(&thread, NULL, myThread, &algo);
+        }
+
     }
 }
 

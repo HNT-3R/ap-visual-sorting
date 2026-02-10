@@ -4,6 +4,7 @@
 #include "raylib.h"
 #include <stdbool.h>
 #include <stdio.h>
+#include <pthread.h>
 #include "../core/core.h"
 
 #define FSTCOLOR (Color){230, 230, 230, 255}

@@ -18,10 +18,7 @@
 #define mass 20
 #define len(arr) (sizeof(arr) / sizeof((arr)[0]))
 
-void* myThread(void* arg) {
-    MyAlgorithm* algo = (MyAlgorithm*) arg;
-    initSort(algo);
-}
+
 
 void initAppState(AppState* state, AlgoInfo *algoInfos) {
     AlgoInfo *bubbleInfos;
@@ -34,6 +31,7 @@ void initAppState(AppState* state, AlgoInfo *algoInfos) {
     state->letCount = 0;
     state->toDraw = 0;
     state->allDistinct = false;
+    state->algoNum = 0;
 
     bubbleInfos = malloc(sizeof(AlgoInfo));
     bubbleInfos -> id = 1;
@@ -107,36 +105,14 @@ int main(void) {
     int sWidth = defaultWidth;
     int sHeight = defaultHeight;
 
-    int num = mass;
-    int *nums = calloc(num, sizeof(int));
-
-    setRanNums(nums, mass);
-
-    pthread_t thread1;
-    List list;
-    MyAlgorithm algoInfo;
     
-
-    list.dynLength = num;
-    list.absLength = num;
-    list.nums = nums;
-    list.index = 0;
-    list.isFinished = false;
-
-    algoInfo.id = 3;
-    algoInfo.list = &list;
-    algoInfo.name = "MyName";
-    algoInfo.accesses = 0;
-    algoInfo.repeats = 0;
-    algoInfo.correct = false;
-    algoInfo.stable = false;
 
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     InitWindow(sWidth, sHeight, "Diagramm Beispiel");
     SetTargetFPS(60); 
 
     
-    pthread_create(&thread1, NULL, myThread, &algoInfo);
+    
 
 
     //0 = chooser window
@@ -155,7 +131,9 @@ int main(void) {
         case 0: drawChooseUI(sWidth, sHeight, &state); break;
         case 1: 
             Rectangle dia = {0, 0, sWidth, sHeight};
-            createDiagram(dia, &list);
+            for (int i = 0; i < state.algoNum; i++) {
+                createDiagram(dia, state.algos[i].list);
+            }
             break;
         }
         
@@ -164,8 +142,7 @@ int main(void) {
         
     }
 
-    pthread_join(thread1, NULL);
-    free(nums);
+    //pthread_join(thread1, NULL);
     CloseWindow();
     printf("stopping...");
     return 0;

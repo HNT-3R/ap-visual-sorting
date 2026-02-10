@@ -16,13 +16,6 @@ typedef struct {
 } AlgoInfo;
 
 typedef struct {
-    char numMaxInput[11];
-    int letCount;
-    int toDraw; //welches fenster soll gezeichnet werden
-    bool allDistinct;
-} AppState;
-
-typedef struct {
     int dynLength;
     int absLength;
     int *nums;
@@ -45,10 +38,18 @@ typedef struct {
     //cpu auslastung
 
     bool correct; //ist sortierung korekt?
-    bool stable; //ändert algorithmus reihenfolge gleicher elemente
-
-
 } MyAlgorithm;
+
+typedef struct {
+    char numMaxInput[11];
+    int letCount;
+    int toDraw; //welches fenster soll gezeichnet werden
+    bool allDistinct;
+    MyAlgorithm algos[16];
+    int algoNum;
+} AppState;
+
+
 
 typedef struct {
     unsigned char algoNum; //wie viele algorithmen zu sortieren
