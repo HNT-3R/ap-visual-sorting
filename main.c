@@ -19,8 +19,8 @@
 #define len(arr) (sizeof(arr) / sizeof((arr)[0]))
 
 void* myThread(void* arg) {
-    List* list = (List*) arg;
-    simpelSort(list);
+    MyAlgorithm* algoInfo = (MyAlgorithm*) arg;
+    initSort(algoInfo);
 }
 
 void initAppState(AppState* state) {
@@ -46,6 +46,7 @@ int main(void) {
 
     pthread_t thread1;
     List list;
+    MyAlgorithm algoInfo;
     
 
     list.dynLength = num;
@@ -54,15 +55,21 @@ int main(void) {
     list.index = 0;
     list.isFinished = false;
 
+    algoInfo.id = 1;
+    algoInfo.list = &list;
+    algoInfo.name = "MyName";
+    algoInfo.accesses = 0;
+    algoInfo.repeats = 0;
+    algoInfo.correct = false;
+    algoInfo.stable = false;
+
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     InitWindow(sWidth, sHeight, "Diagramm Beispiel");
     SetTargetFPS(60); 
 
     
-    pthread_create(&thread1, NULL, myThread, &list);
+    pthread_create(&thread1, NULL, myThread, &algoInfo);
 
-
-    
 
     //0 = chooser window
     //1 = sorting window 
