@@ -16,6 +16,7 @@ typedef struct {
     char* stable;
 } AlgoInfo;
 
+
 typedef struct {
     int dynLength;
     int absLength;
@@ -23,6 +24,7 @@ typedef struct {
     int index;
     bool isFinished;
 } List;
+
 
 typedef struct {
     unsigned char id;
@@ -58,9 +60,6 @@ typedef struct {
 } AppState;
 
 
-
-
-
 typedef struct {
     unsigned char algoNum; //wie viele algorithmen zu sortieren
     unsigned char *algoList; //liste, welche algorithmen verwendet werden sollen
@@ -71,12 +70,7 @@ typedef struct {
 
 } SortStruct;
 
-
-
 #include "../ui/ui.h"
-
-
-
 
 void initSort(MyAlgorithm* algoInfo);
 void initAppState(AppState* state);
@@ -85,6 +79,5 @@ void setRanNums(int *p_nums, int max);
 void setOrderedNums(int *p_nums, int max);
 void setReverseOrderedNums(int *p_nums, int max);
 void shuffleNums(int *p_nums, int maxIndex);
-
 
 #endif

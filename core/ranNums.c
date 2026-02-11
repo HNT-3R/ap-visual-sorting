@@ -8,7 +8,7 @@ int myRanNum(int max) {
 void shuffleNums(int *p_nums, int maxIndex) {
     for (int i = 0; i < maxIndex; i++) {
         int temp = p_nums[i];
-        int randI = myRanNum(maxIndex);
+        int randI = myRanNum(maxIndex - 1);
 
         p_nums[i] = p_nums[randI];
         p_nums[randI] = temp;

@@ -4,21 +4,22 @@
 
 #include "core.h"
 
-#define wait 10000
+//#define wait 10000
+#define baseWait 1000000 //1s
 
-void checkOrder(List *p_list) {
+void checkOrder(List *p_list, int wait) {
     for(int i = 1; i < p_list->dynLength; i++) {
         if(p_list->nums[i] < p_list->nums[i-1]) {
             p_list->isFinished = false;
             return;
         }
         p_list->index = i;
-        usleep(wait/4);
+        usleep(wait/2);
     }
     p_list->isFinished = true;
 }
 
-void simpleSort(MyAlgorithm* algo) {
+void simpleSort(MyAlgorithm* algo, int wait) {
     int swapped = 1;
     List* list = algo->list;
     while (swapped && list->dynLength-- > 0)
@@ -42,7 +43,7 @@ void simpleSort(MyAlgorithm* algo) {
     list->isFinished = true;
 }
 
-void bubbleSort(MyAlgorithm* algo) {
+void bubbleSort(MyAlgorithm* algo, int wait) {
     int swapped = 1;
     List* list = algo->list;
     while (swapped && list->dynLength-- > 0)
@@ -65,7 +66,7 @@ void bubbleSort(MyAlgorithm* algo) {
     list->isFinished = true;
 }
 
-void selectionSort(MyAlgorithm* algo) {
+void selectionSort(MyAlgorithm* algo, int wait) {
     
     List* list;
     int n;
@@ -90,7 +91,7 @@ void selectionSort(MyAlgorithm* algo) {
     }
 }
 
-void insertionSort(MyAlgorithm* algo) {
+void insertionSort(MyAlgorithm* algo, int wait) {
     
     List* list;
     int n;
@@ -104,41 +105,87 @@ void insertionSort(MyAlgorithm* algo) {
         int i = bound;
 
         list->index = bound;
-        usleep(wait);
+        usleep(wait/3);
 
         while(i > 0 && (list->nums[i-1] > currElem)) {
             list->nums[i] = list->nums[i-1];
             i = i - 1;
             list->index = i;
-            usleep(wait);
+            usleep(wait/3);
         }
         list->nums[i] = currElem;
-        usleep(wait);
+        usleep(wait/3);
     }
 }
 
-void bogoSort(MyAlgorithm* algo) {
+void bogoSort(MyAlgorithm* algo, int wait) {
     
     List* list;
     list = algo->list;
     while(true) {
         shuffleNums(list->nums, (list->dynLength));
-        checkOrder(list);
+        checkOrder(list, wait/2);
         if(list->isFinished == true) {
             break;
         }
-        usleep(wait);
+        usleep(wait/2);
     }
+}
+
+//geklaut :)
+void shellSort(MyAlgorithm* algo, int wait) {
+    int gaps[] = {701, 301, 132, 57, 23, 10, 4, 1};
+
+    List* list;
+    list = algo->list;
+    int n = list->dynLength;
+
+    for(int gap = n/2; gap > 0; gap /= 2) {
+        for(int i = gap; i < n; i++) {
+            int temp = list->nums[i];
+            int j = i;
+
+            while (j >= gap && list->nums[j - gap] > temp) {
+                list->nums[j] = list->nums[j - gap];
+                j -= gap;
+            }
+
+            list->nums[j] = temp;
+            list->index = j;
+            usleep(wait/2);
+        }
+        usleep(wait/2);
+    }
+}
+
+
+int calcWait(int numsLength) {
+    //Berechnet die Länge der Wartezeit in µs
+    //Vgl.: 1s  = 1.000.000 µs
+    //      1ms = 1.000 µs
+    // 1s als define definiert für Basiswert
+
+    int waitTime;
+
+    //Gleichung durch Trial and Error bestimmt :P
+    //Versucht die Wartezeit mit der Größe der Liste zu skalieren, 
+    // sodass die Wartezeit für große Listen nicht extrem steigt.
+    waitTime = baseWait / (numsLength / sqrt(numsLength));
+    return waitTime;
+
 }
 
 void initSort(MyAlgorithm* algo) {
     
+    int waitTime = calcWait(algo->list->dynLength);
+
     switch (algo->id) {
-        case 0: simpleSort(algo); break;
-        case 1: bubbleSort(algo); break;
-        case 2: selectionSort(algo); break;
-        case 3: insertionSort(algo); break;
-        case 4: bogoSort(algo); break;
+        case 0: simpleSort(algo, waitTime); break;
+        case 1: bubbleSort(algo, waitTime); break;
+        case 2: selectionSort(algo, waitTime); break;
+        case 3: insertionSort(algo, waitTime); break;
+        case 4: bogoSort(algo, waitTime); break;
+        case 5: shellSort(algo, waitTime); break;
     }
-    checkOrder(algo->list);
+    checkOrder(algo->list, waitTime);
 }
