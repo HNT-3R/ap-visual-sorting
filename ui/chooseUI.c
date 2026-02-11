@@ -23,14 +23,17 @@ void drawSortChooser(int w, int h, AppState* state) {
     //jeweilige seite mit verschiedenen algorithmen anzeigen:
     int shown = 0; //eigener zähler in schleife, der hochgeht, wenn tatsächlich eine zeile gezeichnet wurde
     for (int i = 0; i < state->algoInfoNum; i++) {
-
-        int height = calcRowY(shown + 1, rows, sortingRec) + gapDiff * 2;        
-        Rectangle btnRec = {w*0.22, height, sortingRec.width*0.07f, sortingRec.width*0.07f};
-
         int minIndex = state->showSortChooserPage * numPerPage;
         int maxIndex = minIndex + numPerPage;
+
         if (i >= minIndex && i < maxIndex) {
-            DrawText(state->algoInfos[i].name, spaceRight, height, fontSize, FSTCOLOR);
+            int height = calcRowY(shown + 1, rows, sortingRec) + gapDiff * 2;        
+            Rectangle btnRec = {w*0.22, height, sortingRec.width*0.07f, sortingRec.width*0.07f};
+
+            char nameAndId[64];
+            snprintf(nameAndId, sizeof(nameAndId), "%s %c", state->algoInfos[i].name, state->algoInfos[i].id);
+            //DrawText(nameAndId, spaceRight, height, fontSize, FSTCOLOR);
+            DrawText(TextFormat("%d: %s", state->algoInfos[i].id, state->algoInfos[i].name), spaceRight, height, fontSize, FSTCOLOR);
             drawButton(btnRec, "", &state->algoInfos[i].isSelected, fontSize, FSTCOLOR);
             shown++;
         }
@@ -43,19 +46,33 @@ void drawSortChooser(int w, int h, AppState* state) {
 
     //button, um zur nächsten seite zu gehen
     Rectangle nextBtnRec = {
-        MeasureText(pageNumView, fontSize) + spaceRight + 20, 
+        MeasureText(pageNumView, fontSize) + spaceRight + (w*0.06f), 
         h*0.55f, 
-        sortingRec.width*0.09f, 
-        sortingRec.width*0.09f
+        sortingRec.height*0.06f, 
+        sortingRec.height*0.06f
+    };
+    //button, um zur vorherigen seite zu gehen
+    Rectangle prevBtnRec = {
+        MeasureText(pageNumView, fontSize) + spaceRight + (w*0.01f), 
+        h*0.55f, 
+        sortingRec.height*0.06f, 
+        sortingRec.height*0.06f
     };
     
     //am ende nächste-seite-button wieder auf false setzen und button neu malen
     bool nextPressed = false;
-    drawButton(nextBtnRec, ">", &nextPressed, nextBtnRec.height*2, FSTCOLOR);
+    bool prevPressed = false;
+    drawButton(nextBtnRec, ">", &nextPressed, nextBtnRec.height*1.2f, FSTCOLOR);
     if (nextPressed) {
         state->showSortChooserPage++;
         if (state->showSortChooserPage >= totalPages) 
             state->showSortChooserPage = 0;
+    }
+    drawButton(prevBtnRec, "<", &prevPressed, prevBtnRec.height*1.2f, FSTCOLOR);
+    if (prevPressed) {
+        state->showSortChooserPage--;
+        if (state->showSortChooserPage <= 0) 
+            state->showSortChooserPage = totalPages-1;
     }
 
     drawOutline(sortingRec, 4, FSTCOLOR);

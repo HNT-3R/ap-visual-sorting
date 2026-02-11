@@ -47,7 +47,6 @@ void drawInputField(Rectangle box, char* input, int* letterCount, int fontSize) 
             if (*letterCount <  0) *letterCount = 0;
             input[*letterCount] = '\0';
         }
-        //if (*letterCount >= 8) *letterCount = 8;
 
     } else {
         SetMouseCursor(MOUSE_CURSOR_DEFAULT);
