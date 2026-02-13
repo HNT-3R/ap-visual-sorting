@@ -25,11 +25,11 @@ void drawDiagramsUI(float w, float h, AppState* state) {
             DrawText((state->algos[counter].name), rec.x, rec.y, (w * h * 0.000022f), LIME);
             
 
-            //if(state->algos[myIndex].list->isFinished) {finishedCounter++;}
+            if(state->algos[counter].list->isFinished) {finishedCounter++;}
             counter++;
             
             
         }
     }
-    //if(finishedCounter >= state->algoNum) {state->toDraw = 2;}
+    if(finishedCounter >= state->algoNum) {state->toDraw = 2;}
 }

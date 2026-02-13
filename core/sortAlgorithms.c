@@ -191,6 +191,28 @@ void initSort(MyAlgorithm* algo) {
         case 3: insertionSort(algo, waitTime); break;
         case 4: bogoSort(algo, waitTime); break;
         case 5: shellSort(algo, waitTime); break;
+
+        //hier fehlt code
+        case 6: selectionSort(algo, waitTime); break;
+        case 7: selectionSort(algo, waitTime); break;
+        case 8: selectionSort(algo, waitTime); break;
+        case 9: selectionSort(algo, waitTime); break;
+        case 10: selectionSort(algo, waitTime); break;
+        case 11: selectionSort(algo, waitTime); break;
+        case 12: selectionSort(algo, waitTime); break;
+        case 13: selectionSort(algo, waitTime); break;
+        case 14: selectionSort(algo, waitTime); break;
+        case 15: selectionSort(algo, waitTime); break;
+        case 16: selectionSort(algo, waitTime); break;
+        case 17: selectionSort(algo, waitTime); break;
+        case 18: selectionSort(algo, waitTime); break;
+        case 19: selectionSort(algo, waitTime); break;
+        case 20: selectionSort(algo, waitTime); break;
+        case 21: selectionSort(algo, waitTime); break;
+        case 22: selectionSort(algo, waitTime); break;
+        case 23: selectionSort(algo, waitTime); break;
+        case 24: selectionSort(algo, waitTime); break;
+        
     }
     checkOrder(algo->list, waitTime);
 }

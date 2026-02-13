@@ -175,7 +175,7 @@ void drawOptChooser(int w, int h, AppState* state) {
 void* myThread(void* arg) {
     MyAlgorithm* algo = (MyAlgorithm*) arg;
     initSort(algo);
-    pthread_exit(0);
+    //pthread_exit(0);
 }
 
 void drawStartButton(int w, int h, AppState* state) {
@@ -239,7 +239,8 @@ void drawStartButton(int w, int h, AppState* state) {
                 state->algos[counter].list = list;  //ointer auf heap
 
                 state->algoNum++;
-                pthread_create(&state->threads[counter], NULL, myThread, algo);
+                int ret = pthread_create(&state->threads[counter], NULL, myThread, algo);
+                printf("thread return: %d, for algo: %s", ret, algo->name);
                 counter ++;
             }
         }
