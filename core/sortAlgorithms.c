@@ -5,7 +5,7 @@
 #include "core.h"
 
 //#define wait 10000
-#define baseWait 60000000 //60s
+#define baseWait 5000000 //5s
 
 void checkOrder(List *p_list, int wait) {
     for(int i = 1; i < p_list->dynLength; i++) {
@@ -214,5 +214,6 @@ void initSort(MyAlgorithm* algo) {
         case 24: selectionSort(algo, waitTime); break;
         
     }
+
     checkOrder(algo->list, waitTime);
 }

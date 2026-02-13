@@ -1,10 +1,5 @@
 #include "ui.h"
 
-#define calcRowY(row, rowNum, rec) (rec.y+(rec.height/rowNum*row)+gapDiff)
-
-int spaceRight = 8;
-int gapDiff = 30;
-
 void drawSortViewer(int w, int h, AppState* state) {
     Rectangle viewerRec = {w*0.25f - 4, 0, w*0.75f, h};
     int fontSize = w * 0.025f;
@@ -239,7 +234,7 @@ void drawStartButton(int w, int h, AppState* state) {
                 state->algos[counter].list = list;  //ointer auf heap
 
                 state->algoNum++;
-                int ret = pthread_create(&state->threads[counter], NULL, myThread, algo);
+                int ret = pthread_create(&state->threads[counter], NULL, myThread, &state->algos[counter]);
                 printf("thread return: %d, for algo: %s", ret, algo->name);
                 counter ++;
             }

@@ -12,6 +12,10 @@
 #define FSTCOLOR (Color){230, 230, 230, 255}
 #define SNDCOLOR (Color){80, 80, 80, 255}
 #define BGNCOLOR (Color){0, 0, 0, 255}
+#define spaceRight 8
+#define gapDiff 30
+#define headerFontMult 1.6f
+#define calcRowY(row, rowNum, rec) (rec.y+(rec.height/rowNum*row)+gapDiff)
 
 typedef struct {
     Rectangle box;
