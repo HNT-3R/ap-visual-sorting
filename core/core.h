@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+#define MAXARNUM 25
+
 typedef struct {
     unsigned char id;
     bool isSelected;
@@ -49,9 +51,9 @@ typedef struct {
     int letCount;
     int toDraw; //welches fenster soll gezeichnet werden
     bool allDistinct;
-    MyAlgorithm algos[16];
+    MyAlgorithm algos[MAXARNUM];
     int algoNum; //ausgewählte sortieralgorithmen;
-    pthread_t threads[16];
+    pthread_t threads[MAXARNUM];
     AlgoInfo* algoInfos;
     int algoInfoNum;
 

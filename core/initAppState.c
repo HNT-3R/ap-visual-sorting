@@ -19,7 +19,7 @@ void initAppState(AppState* state) {
     state->nextSortViewerPage = false;
 
     
-    int algoInfoNum = 23;
+    int algoInfoNum = MAXARNUM;
     AlgoInfo *algoInfos = calloc(algoInfoNum, sizeof(AlgoInfo));
     initAlgoInfos(algoInfos);
 
@@ -360,7 +360,7 @@ void initAlgoInfos(AlgoInfo *algoInfos) {
     algoInfos[21].stable = "unknown";
     algoInfos[21].isSelected = false;
 
-        // Selectionsort
+            // Selectionsort
     algoInfos[22].id = 22;
     algoInfos[22].name = "Selectionsort";
     algoInfos[22].description = "Selection Sort beginnt stets mit dem "
@@ -374,4 +374,33 @@ void initAlgoInfos(AlgoInfo *algoInfos) {
     algoInfos[22].bestCase = "O(n²)";
     algoInfos[22].stable = "unknown";
     algoInfos[22].isSelected = false;
+
+        // Selectionsort
+    algoInfos[23].id = 23;
+    algoInfos[23].name = "Selectionsort";
+    algoInfos[23].description = "Selection Sort beginnt stets mit dem "
+    "ersten Element der Liste. Das Startelement wird als Minimum eingespeichert. "
+    "Bei jedem Durchlauf werden alle Elemente der Liste mit dem Minimum verglichen. "
+    "Am Ende der Liste angekommen, wird das Minimum am Anfang der Liste platziert und beim "
+    "nächsten Durchlauf aus der Liste ausgelassen.\n"
+    "Link: https://publications.scss.tcd.ie/tech-reports/reports.05/TCD-CS-2005-57.pdf ";
+    algoInfos[23].worstCase = "O(n²)";
+    algoInfos[23].averageCase = "O(n²)";
+    algoInfos[23].bestCase = "O(n²)";
+    algoInfos[23].stable = "unknown";
+    algoInfos[23].isSelected = false;
+        // Selectionsort
+    algoInfos[24].id = 24;
+    algoInfos[24].name = "Selectionsort";
+    algoInfos[24].description = "Selection Sort beginnt stets mit dem "
+    "ersten Element der Liste. Das Startelement wird als Minimum eingespeichert. "
+    "Bei jedem Durchlauf werden alle Elemente der Liste mit dem Minimum verglichen. "
+    "Am Ende der Liste angekommen, wird das Minimum am Anfang der Liste platziert und beim "
+    "nächsten Durchlauf aus der Liste ausgelassen.\n"
+    "Link: https://publications.scss.tcd.ie/tech-reports/reports.05/TCD-CS-2005-57.pdf ";
+    algoInfos[24].worstCase = "O(n²)";
+    algoInfos[24].averageCase = "O(n²)";
+    algoInfos[24].bestCase = "O(n²)";
+    algoInfos[24].stable = "unknown";
+    algoInfos[24].isSelected = false;
 }
