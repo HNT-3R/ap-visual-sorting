@@ -40,7 +40,7 @@ void drawAlgoInfos(int w, int h, AppState* state) {
             int btnDimension = w*h*0.000027f;
             snprintf(accesses, sizeof(accesses), "Accesses: %ld", state->algos[i].accesses);
             snprintf(repeats, sizeof(repeats), "Repeats: %ld", state->algos[i].repeats);
-            snprintf(time, sizeof(time), "Time elapsed: %lfs", state->algos[i].time);
+            snprintf(time, sizeof(time), "CPU-Time elapsed: %lfs", state->algos[i].time);
 
             DrawText(state->algos[i].name, algoRec.x + 16, height, fontSize, FSTCOLOR);
             DrawText(accesses, algoRec.x + 32, height + fontSize, fontSize, FSTCOLOR);

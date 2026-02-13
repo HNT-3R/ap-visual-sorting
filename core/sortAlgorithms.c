@@ -19,33 +19,12 @@ void checkOrder(List *p_list, int wait) {
     p_list->isFinished = true;
 }
 
-void simpleSort(MyAlgorithm* algo, int wait) {
+void bubbleSort(MyAlgorithm* algo, int wait, struct timespec* start) {
+    struct timespec end;
+    
     int swapped = 1;
     List* list = algo->list;
-    while (swapped && list->dynLength-- > 0)
-    {  
-        swapped = 0;
-        for(int i=0; i<list->dynLength; ++i)
-        {
-            if(list->nums[i] > list->nums[i+1])
-            {
-                int temp = list->nums[i];
-                list->nums[i] = list->nums[i+1];
-                list->nums[i+1] = temp;
-                swapped = 1;
-            }
-            
-            list->index = i;
-            usleep(wait);
-        }
-        
-    }
-    list->isFinished = true;
-}
 
-void bubbleSort(MyAlgorithm* algo, int wait) {
-    int swapped = 1;
-    List* list = algo->list;
     while (swapped && list->dynLength-- > 0)
     {  
         swapped = 0;
@@ -57,11 +36,17 @@ void bubbleSort(MyAlgorithm* algo, int wait) {
                 list->nums[i] = list->nums[i+1];
                 list->nums[i+1] = temp;
                 swapped = 1;
+
+                algo->accesses += 3;
             }
-            usleep(wait);
             list->index = i;
+
+            usleep(wait);
+            clock_gettime(CLOCK_THREAD_CPUTIME_ID, &end);
+            algo->time = (end.tv_sec - start->tv_sec);
+            algo->time += (end.tv_nsec - start->tv_nsec) / 1000000000.0;
         }
-        
+        algo->repeats += 1;
     }
     list->isFinished = true;
 }
@@ -82,12 +67,16 @@ void selectionSort(MyAlgorithm* algo, int wait, struct timespec* start) {
             if(list->nums[j] < list->nums[minIdx]) {
                 minIdx = j;
             }
+            algo->accesses += 1;
         }
-
         int tmp = list->nums[i];
         list->nums[i] = list->nums[minIdx];
         list->nums[minIdx] = tmp;
         list->index = minIdx;
+
+        algo->repeats += 1;
+        algo->accesses += 2;
+
         usleep(wait);
         clock_gettime(CLOCK_THREAD_CPUTIME_ID, &end);
         algo->time = (end.tv_sec - start->tv_sec);
@@ -105,8 +94,7 @@ void insertionSort(MyAlgorithm* algo, int wait, struct timespec* start) {
     n = list->dynLength;
 
     for(int bound = 1; bound < n; bound++) {
-        algo->repeats += 1;
-        algo->accesses += 2;
+        
         
         int currElem = list->nums[bound];
         int i = bound;
@@ -115,39 +103,50 @@ void insertionSort(MyAlgorithm* algo, int wait, struct timespec* start) {
         usleep(wait/3);
 
         while(i > 0 && (list->nums[i-1] > currElem)) {
-            algo->accesses += 2;
             list->nums[i] = list->nums[i-1];
             i = i - 1;
+
             list->index = i;
+            algo->accesses += 2;
             usleep(wait/3);
         }
         list->nums[i] = currElem;
-        usleep(wait/3);
 
+        algo->repeats += 1;
+        algo->accesses += 1;
+
+        usleep(wait/3);
         clock_gettime(CLOCK_THREAD_CPUTIME_ID, &end);
         algo->time = (end.tv_sec - start->tv_sec);
         algo->time += (end.tv_nsec - start->tv_nsec) / 1000000000.0;
     }
 }
 
-void bogoSort(MyAlgorithm* algo, int wait) {
+void bogoSort(MyAlgorithm* algo, int wait, struct timespec* start) {
     
+    struct timespec end;
     List* list;
     list = algo->list;
     while(true) {
-        algo->repeats += 1;
         shuffleNums(list->nums, (list->dynLength));
         checkOrder(list, wait/2);
         if(list->isFinished == true) {
             break;
         }
+
+        algo->repeats += 1;
+        algo->accesses += list->dynLength * 2;
+
         usleep(wait/2);
+        clock_gettime(CLOCK_THREAD_CPUTIME_ID, &end);
+        algo->time = (end.tv_sec - start->tv_sec);
+        algo->time += (end.tv_nsec - start->tv_nsec) / 1000000000.0;
     }
 }
 
 //geklaut :)
-void shellSort(MyAlgorithm* algo, int wait) {
-    int gaps[] = {701, 301, 132, 57, 23, 10, 4, 1};
+void shellSort(MyAlgorithm* algo, int wait, struct timespec* start) {
+    struct timespec end;
 
     List* list;
     list = algo->list;
@@ -164,9 +163,17 @@ void shellSort(MyAlgorithm* algo, int wait) {
             }
 
             list->nums[j] = temp;
-            list->index = j;
+            list->index = j; 
+
+            algo->accesses += 4;
+
             usleep(wait/2);
+            clock_gettime(CLOCK_THREAD_CPUTIME_ID, &end);
+            algo->time = (end.tv_sec - start->tv_sec);
+            algo->time += (end.tv_nsec - start->tv_nsec) / 1000000000.0;
         }
+        algo->repeats += 1;
+
         usleep(wait/2);
     }
 }
@@ -196,12 +203,12 @@ void initSort(MyAlgorithm* algo) {
     int waitTime = calcWait(algo->list->dynLength);
 
     switch (algo->id) {
-        case 0: simpleSort(algo, waitTime); break;
-        case 1: bubbleSort(algo, waitTime); break;
+        case 0: bubbleSort(algo, waitTime, &start); break;
+        case 1: bubbleSort(algo, waitTime, &start); break;
         case 2: selectionSort(algo, waitTime, &start); break;
         case 3: insertionSort(algo, waitTime, &start); break;
-        case 4: bogoSort(algo, waitTime); break;
-        case 5: shellSort(algo, waitTime); break;
+        case 4: bogoSort(algo, waitTime, &start); break;
+        case 5: shellSort(algo, waitTime, &start); break;
 
         //hier fehlt code
         
