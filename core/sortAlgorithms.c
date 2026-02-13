@@ -124,9 +124,15 @@ void insertionSort(MyAlgorithm* algo, int wait, struct timespec* start) {
 
 void bogoSort(MyAlgorithm* algo, int wait, struct timespec* start) {
     
+    
     struct timespec end;
     List* list;
     list = algo->list;
+
+    checkOrder(list, wait/2);
+    algo->accesses += list->dynLength;
+    if(list->isFinished) return;
+
     while(true) {
         shuffleNums(list->nums, (list->dynLength));
         checkOrder(list, wait/2);

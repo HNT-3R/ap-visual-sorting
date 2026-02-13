@@ -229,9 +229,20 @@ void drawStartButton(int w, int h, AppState* state) {
 
         int *nums = calloc(mass, sizeof(int));
         if (state->allDistinct){
-            setAllDisctinctRanNums(nums, mass); 
+            setAllDisctinctSortedAsc(nums, mass);
+            if(!state->sorted) {
+                shuffleNums(nums, mass);
+            } else if(state->descending) {
+                setNumsBackwards(nums, mass);
+            }
         } else {
-            setRanNums(nums, mass);
+            setRanNumsUnsorted(nums, mass);
+            if(state->sorted) {
+                setSorted(nums, mass);
+                if(state->descending) {
+                    setNumsBackwards(nums, mass);
+                }
+            }
         }
 
         int counter = 0;
