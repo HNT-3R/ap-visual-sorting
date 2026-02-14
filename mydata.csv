@@ -3,3 +3,5 @@ Bubblesort,100,false,false,false,0.150015,7314,89,2026-2-13-15:51
 Selectionsort,100,false,false,false,0.002643,5148,99,2026-2-13-15:51
 Insertionsort,100,false,false,false,0.045648,4975,99,2026-2-13-15:51
 Shellsort,100,false,false,false,0.011813,2012,6,2026-2-13-15:51
+Shellsort,100,false,false,false,0.004992,2012,6,2026-2-14-23:19
+Heapsort,100,false,false,false,0.007213,627,198,2026-2-14-23:19

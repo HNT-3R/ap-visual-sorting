@@ -135,18 +135,15 @@ void initAlgoInfos(AlgoInfo *algoInfos) {
     algoInfos[6].stable = "unknown";
     algoInfos[6].isSelected = false;
 
-        // Selectionsort
+        // Bucketsort
     algoInfos[7].id = 7;
-    algoInfos[7].name = "Selectionsort";
-    algoInfos[7].description = "Selection Sort beginnt stets mit dem "
-    "ersten Element der Liste. Das Startelement wird als Minimum eingespeichert. "
-    "Bei jedem Durchlauf werden alle Elemente der Liste mit dem Minimum verglichen. "
-    "Am Ende der Liste angekommen, wird das Minimum am Anfang der Liste platziert und beim "
-    "nächsten Durchlauf aus der Liste ausgelassen.\n"
-    "Link: https://publications.scss.tcd.ie/tech-reports/reports.05/TCD-CS-2005-57.pdf ";
-    algoInfos[7].worstCase = "O(n²)";
-    algoInfos[7].averageCase = "O(n²)";
-    algoInfos[7].bestCase = "O(n²)";
+    algoInfos[7].name = "Bucketsort";
+    algoInfos[7].description = "Alle Elemente der Liste werden in k sogenannte Buckets einsortiert,\n"
+    "wobei k die Anzahl der Buckets ist. In einem Bucket befinden sich ähnliche Elemente der Liste.\n"
+    "Diese Buckets werden nun sortiert und anschließend zusammengefügt in Sequenz.";
+    algoInfos[7].worstCase = "N.A.";
+    algoInfos[7].averageCase = "N.A.";
+    algoInfos[7].bestCase = "N.A.";
     algoInfos[7].stable = "unknown";
     algoInfos[7].isSelected = false;
 

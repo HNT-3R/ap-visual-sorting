@@ -251,6 +251,28 @@ void heapSort(MyAlgorithm* algo, int wait, struct timespec* start) {
     }
 }
 
+/*
+void bucketSort(MyAlgorithm* algo, int wait, struct timespec* start) {
+    struct timespec end;
+    List* list;
+    list = algo->list;
+    int n = list->dynLength;
+    int bucketNum = n/2;
+    
+    int* buckets[bucketNum];
+
+    for(int i = 0; i < bucketNum; i++) {
+        int bucket[n];
+        buckets[i] = bucket;
+    }
+
+    for(int i = 0; i < n; i++) {
+        int bi = (int) (bucketNum * list->nums[i]);
+        buckets[bi] = 
+    }
+}
+    */
+
 
 int calcWait(int numsLength) {
     //Berechnet die Länge der Wartezeit in µs
