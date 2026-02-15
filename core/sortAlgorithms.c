@@ -7,6 +7,12 @@
 //#define wait 10000
 #define baseWait 30000000 //30s
 
+typedef struct {
+  int* elements;
+  int size;
+  int capacity;
+} Bucket;
+
 void checkOrder(List *p_list, int wait) {
     for(int i = 1; i < p_list->dynLength; i++) {
         if(p_list->nums[i] < p_list->nums[i-1]) {
@@ -251,7 +257,38 @@ void heapSort(MyAlgorithm* algo, int wait, struct timespec* start) {
     }
 }
 
-/*
+void initBucket(Bucket* bucket, int initCapacity) {
+    bucket->elements = (int*) malloc(initCapacity * sizeof(int));
+    bucket->size = 0;
+    bucket->capacity = initCapacity;
+}
+
+void addToBucket(Bucket* bucket, int val) {
+    if (bucket->size >= bucket->capacity) {
+    bucket->capacity *= 2;
+    bucket->elements = (int*) realloc(bucket->elements, 
+        bucket->capacity * sizeof(int));
+    }
+    bucket->elements[bucket->size++] = val;
+}
+
+void bucketSelectionSort(int arr[], int n, int wait) {
+    for (int i = 0; i < n - 1; i++) {
+        int minIndex = i;
+        for (int j = i + 1; j < n; j++) {
+            if (arr[j] < arr[minIndex]) {
+                minIndex = j;
+            }
+        }
+        if (minIndex != i) {
+            int temp = arr[i];
+            arr[i] = arr[minIndex];
+            arr[minIndex] = temp;
+        }
+        usleep(wait/4);
+    }
+}
+
 void bucketSort(MyAlgorithm* algo, int wait, struct timespec* start) {
     struct timespec end;
     List* list;
@@ -259,20 +296,46 @@ void bucketSort(MyAlgorithm* algo, int wait, struct timespec* start) {
     int n = list->dynLength;
     int bucketNum = n/2;
     
-    int* buckets[bucketNum];
+    Bucket* buckets = (Bucket*)malloc(bucketNum * sizeof(Bucket));
+
+    for(int i = 0; i < bucketNum; ++i) {
+        initBucket(&buckets[i],10);
+    }
+
+    for(int i = 0; i < n; ++i) {
+        usleep(wait/4);
+        list->index = i; 
+        int bucketIdx = (bucketNum * list->nums[i]) / (n-1);
+        if(bucketIdx >= bucketNum) bucketIdx = bucketNum - 1;
+        addToBucket(&buckets[bucketIdx], list->nums[i]);
+
+        clock_gettime(CLOCK_THREAD_CPUTIME_ID, &end);
+        algo->time = (end.tv_sec - start->tv_sec);
+        algo->time += (end.tv_nsec - start->tv_nsec) / 1000000000.0;
+    }
 
     for(int i = 0; i < bucketNum; i++) {
-        int bucket[n];
-        buckets[i] = bucket;
+        usleep(wait/4);
+        if(buckets[i].size > 0) {
+            bucketSelectionSort(buckets[i].elements, buckets[i].size, wait);
+        }
     }
 
-    for(int i = 0; i < n; i++) {
-        int bi = (int) (bucketNum * list->nums[i]);
-        buckets[bi] = 
+    int idx = 0;
+    for(int i = 0; i < bucketNum; i++) {
+        usleep(wait/4);
+        list->index = i; 
+        for(int j = 0; j < buckets[i].size; j++) {
+            usleep(wait/4);
+            list->nums[idx++] = buckets[i].elements[j];
+
+            clock_gettime(CLOCK_THREAD_CPUTIME_ID, &end);
+            algo->time = (end.tv_sec - start->tv_sec);
+            algo->time += (end.tv_nsec - start->tv_nsec) / 1000000000.0;
+        }
     }
+
 }
-    */
-
 
 int calcWait(int numsLength) {
     //Berechnet die Länge der Wartezeit in µs
@@ -305,7 +368,7 @@ void initSort(MyAlgorithm* algo) {
         case 4: bogoSort(algo, waitTime, &start); break;
         case 5: shellSort(algo, waitTime, &start); break;
         case 6: heapSort(algo, waitTime, &start); break;
-        case 7: selectionSort(algo, waitTime, &start); break;
+        case 7: bucketSort(algo, waitTime, &start); break;
         case 8: selectionSort(algo, waitTime, &start); break;
         case 9: selectionSort(algo, waitTime, &start); break;
         case 10: selectionSort(algo, waitTime, &start); break;

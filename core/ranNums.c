@@ -1,21 +1,23 @@
 #include "core.h"
 
-
-int myRanNum(int max) { 
+//generiert eine zufällige Ganzzahl unter dem gegebenen Limit
+int generateRandomNumber(int max) { 
     return (rand() % max + 1);
 }
 
+//mischt ein Integer-Array
 void shuffleNums(int *p_nums, int maxIndex) {
     for (int i = 0; i < maxIndex; i++) {
         int temp = p_nums[i];
-        int randI = myRanNum(maxIndex - 1);
+        int randI = generateRandomNumber(maxIndex - 1);
 
         p_nums[i] = p_nums[randI];
         p_nums[randI] = temp;
     }
 }
 
-//alle zahen unterschiedlich
+//füllt ein Array mit vollkommen unterschiedlichen Werten
+//Resultat ist aufsteigend sortiert
 void setAllDisctinctSortedAsc(int *p_nums, int max) {
     //alldistinct machen
     for (int i = 0; i < max; i++) {
@@ -23,25 +25,15 @@ void setAllDisctinctSortedAsc(int *p_nums, int max) {
     }
 }
 
-//alle zahlen random, können auch gleiche mehrmals vorkommen
+//füllt ein Array mit vollkommen unterschiedlichen Zahlen
+//Zahlen können mehrfach vorkommen und sind unsortiert
 void setRanNumsUnsorted(int *p_nums, int max) {
     for (int i = 0; i < max; i++) {
-        p_nums[i] = myRanNum(max);
+        p_nums[i] = generateRandomNumber(max);
     }
 }
 
-void setOrderedNums(int *p_nums, int max) {
-    for (int i = 0; i < max; i++) {
-        p_nums[i] = i;
-    }
-}
-
-void setReverseOrderedNums(int *p_nums, int max) {
-    for (int i = 0; i < max; i++) {
-        p_nums[i] = max - i;
-    }
-}
-
+//ordnet ein Array rüchwärts an
 void setNumsBackwards(int *p_nums, int max) {
     for (int i = 0; i < max/2; i++) {
         int temp = p_nums[i];
@@ -50,6 +42,8 @@ void setNumsBackwards(int *p_nums, int max) {
     }
 }
 
+//sortiert ein Array mit Selectionsort
+//benötigt für non-distinct Arrays
 void setSorted(int *p_nums, int max) {
     List* list;
     int n;
