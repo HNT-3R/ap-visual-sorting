@@ -43,8 +43,10 @@ void bubbleSort(MyAlgorithm* algo, int wait, struct timespec* start) {
                 list->nums[i+1] = temp;
                 swapped = 1;
 
-                algo->accesses += 3;
+                algo->accesses += 2;
             }
+            algo->accesses += 1;
+
             list->index = i;
 
             usleep(wait/10);
@@ -234,7 +236,7 @@ void heapSort(MyAlgorithm* algo, int wait, struct timespec* start) {
     int n = list->dynLength;
 
     //beginne vom letzten möglichen Elternknoten
-    for(int i = n/2 - 2; i >= 0; i--) {
+    for(int i = n/2 - 1; i >= 0; i--) {
         list->index = i; 
         usleep(wait/4);
 
