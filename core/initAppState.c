@@ -102,63 +102,42 @@ void initAlgoInfos(AlgoInfo *algoInfos) {
     algoInfos[4].stable = "nein";
     algoInfos[4].isSelected = false;
 
-    // Quicksort
+    // Shellsort
     algoInfos[5].id = 5;
-    algoInfos[5].name = "Quicksort";
-    algoInfos[5].description = "Selection Sort beginnt stets mit dem "
-    "ersten Element der Liste. Das Startelement wird als Minimum eingespeichert. "
-    "Bei jedem Durchlauf werden alle Elemente der Liste mit dem Minimum verglichen. "
-    "Am Ende der Liste angekommen, wird das Minimum am Anfang der Liste platziert und beim "
-    "nächsten Durchlauf aus der Liste ausgelassen.\n"
-    "Link: https://publications.scss.tcd.ie/tech-reports/reports.05/TCD-CS-2005-57.pdf ";
+    algoInfos[5].name = "Shellsort";
+    algoInfos[5].description = "shellsort fehlt text";
     algoInfos[5].worstCase = "O(n²)";
     algoInfos[5].averageCase = "O(n²)";
     algoInfos[5].bestCase = "O(n²)";
     algoInfos[5].stable = "unknown";
     algoInfos[5].isSelected = false;
 
-            // Selectionsort
+    // Heapsort
     algoInfos[6].id = 6;
-    algoInfos[6].name = "Shellsort";
-    algoInfos[6].description = "Selection Sort beginnt stets mit dem "
-    "ersten Element der Liste. Das Startelement wird als Minimum eingespeichert. "
-    "Bei jedem Durchlauf werden alle Elemente der Liste mit dem Minimum verglichen. "
-    "Am Ende der Liste angekommen, wird das Minimum am Anfang der Liste platziert und beim "
-    "nächsten Durchlauf aus der Liste ausgelassen.\n"
-    "Link: https://publications.scss.tcd.ie/tech-reports/reports.05/TCD-CS-2005-57.pdf ";
-    algoInfos[6].worstCase = "O(n²)";
-    algoInfos[6].averageCase = "O(n²)";
-    algoInfos[6].bestCase = "O(n²)";
-    algoInfos[6].stable = "unknown";
-    algoInfos[6].isSelected = false;
+    algoInfos[6].name = "Heapsort";
+    algoInfos[6].description = "Heapsort ist ein vergleichbasierter, in-place Sortieralgorithmus,\n"
+    "welcher auf dem Binary Heap basiert. Dies ermöglicht den schnellstmöglichen Zugriff auf \n"
+    "das größte Element der originalen Liste. Die Funktionsweise ist mit dem\n"
+    "Selectionsort zu vergleichen.";
+    algoInfos[6].worstCase = "O(n)";
+    algoInfos[6].averageCase = "O(n log n)";
+    algoInfos[6].bestCase = "O(n log n)";
 
-
-
-
-
-    //////////////////////////////////////////
-    //hier fehlt code (algodaten sind nur platzhalte/temporär)
-
-
-
-        // Selectionsort
+    // Bucketsort
     algoInfos[7].id = 7;
-    algoInfos[7].name = "Selectionsort";
-    algoInfos[7].description = "Selection Sort beginnt stets mit dem "
-    "ersten Element der Liste. Das Startelement wird als Minimum eingespeichert. "
-    "Bei jedem Durchlauf werden alle Elemente der Liste mit dem Minimum verglichen. "
-    "Am Ende der Liste angekommen, wird das Minimum am Anfang der Liste platziert und beim "
-    "nächsten Durchlauf aus der Liste ausgelassen.\n"
-    "Link: https://publications.scss.tcd.ie/tech-reports/reports.05/TCD-CS-2005-57.pdf ";
-    algoInfos[7].worstCase = "O(n²)";
-    algoInfos[7].averageCase = "O(n²)";
-    algoInfos[7].bestCase = "O(n²)";
+    algoInfos[7].name = "Bucketsort";
+    algoInfos[7].description = "Alle Elemente der Liste werden in k sogenannte Buckets einsortiert,\n"
+    "wobei k die Anzahl der Buckets ist. In einem Bucket befinden sich ähnliche Elemente der Liste.\n"
+    "Diese Buckets werden nun sortiert und anschließend zusammengefügt in Sequenz.";
+    algoInfos[7].worstCase = "N.A.";
+    algoInfos[7].averageCase = "N.A.";
+    algoInfos[7].bestCase = "N.A.";
     algoInfos[7].stable = "unknown";
     algoInfos[7].isSelected = false;
 
-        // Selectionsort
+   // Quicksort
     algoInfos[8].id = 8;
-    algoInfos[8].name = "Selectionsort";
+    algoInfos[8].name = "Quicksort";
     algoInfos[8].description = "Selection Sort beginnt stets mit dem "
     "ersten Element der Liste. Das Startelement wird als Minimum eingespeichert. "
     "Bei jedem Durchlauf werden alle Elemente der Liste mit dem Minimum verglichen. "
@@ -170,6 +149,9 @@ void initAlgoInfos(AlgoInfo *algoInfos) {
     algoInfos[8].bestCase = "O(n²)";
     algoInfos[8].stable = "unknown";
     algoInfos[8].isSelected = false;
+
+
+//hier fehlt code
 
         // Selectionsort
     algoInfos[9].id = 9;
