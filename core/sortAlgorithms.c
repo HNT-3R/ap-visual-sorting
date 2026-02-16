@@ -382,7 +382,85 @@ void quickSortWrapper(MyAlgorithm* algo, int wait, struct timespec* start) {
     int length = list->absLength; 
     
     quickSort(algo, arr, 0, length - 1, wait, start); 
+    algo->list->isFinished = true;
+}
+
+void merge(MyAlgorithm* algo, int* arr, int left, int mid, int right, int wait, struct timespec* start) {
+    struct timespec end;
+    algo->repeats += 1;
+    usleep(wait);
     
+    int n1 = mid - left + 1;
+    int n2 = right - mid;
+
+    int leftArr[n1];
+    int rightArr[n2];
+    algo->accesses += 2;
+
+    int i = 0;
+    int j = 0;
+    for (i; i < n1; i++) {
+        leftArr[i] = arr[left + i];
+        algo->list->index = left + i;
+        algo->accesses += 2;
+    }
+
+    for (j; j < n2; j++) {
+        rightArr[j] = arr[mid + 1 + j];
+        algo->list->index = mid + 1 + j;
+        algo->accesses += 2;
+    }
+
+    int k = left;
+    i = 0;
+    j = 0;
+    while (i < n1 && j < n2) {
+        algo->accesses += 2;
+        if (leftArr[i] <= rightArr[j]) {
+            arr[k] = leftArr[i];
+            algo->accesses += 2;
+            i++;
+        } else {
+            arr[k] = rightArr[j];
+            algo->accesses += 2;
+            j++;
+        }
+        k++;
+    }
+
+    while (i < n1) {
+        arr[k] = leftArr[i];
+        algo->accesses += 2;
+        i++;
+        k++;
+    }
+
+    while (j < n2) {
+        arr[k] = rightArr[j];
+        algo->accesses += 2;
+        j++;
+        k++;
+    }
+    clock_gettime(CLOCK_THREAD_CPUTIME_ID, &end);
+    algo->time = (end.tv_sec - start->tv_sec);
+    algo->time += (end.tv_nsec - start->tv_nsec) / 1000000000.0;
+}
+
+void mergeSort(MyAlgorithm* algo, int* arr, int left, int right, int wait, struct timespec* start) {
+    struct timespec* end;
+    
+    if (left < right) {
+        int mid = left + (right - left) / 2;
+
+        mergeSort(algo, arr, left, mid, wait, start);
+        mergeSort(algo, arr, mid + 1, right, wait, start); 
+        merge(algo, arr, left, mid, right, wait, start);
+    }
+}
+
+void mergeSortWrapper(MyAlgorithm* algo, int wait, struct timespec* start) {
+    mergeSort(algo, algo->list->nums, 0, algo->list->absLength - 1, wait, start);
+
 }
 
 
@@ -419,7 +497,7 @@ void initSort(MyAlgorithm* algo) {
         case 6: heapSort(algo, waitTime, &start); break;
         case 7: bucketSort(algo, waitTime, &start); break;
         case 8: quickSortWrapper(algo, waitTime, &start); break;
-        case 9: selectionSort(algo, waitTime, &start); break;
+        case 9: mergeSortWrapper(algo, waitTime, &start); break;
         case 10: selectionSort(algo, waitTime, &start); break;
         case 11: selectionSort(algo, waitTime, &start); break;
         case 12: selectionSort(algo, waitTime, &start); break;

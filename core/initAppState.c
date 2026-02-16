@@ -152,7 +152,7 @@ void initAlgoInfos(AlgoInfo *algoInfos) {
 
         // Selectionsort
     algoInfos[9].id = 9;
-    algoInfos[9].name = "Selectionsort";
+    algoInfos[9].name = "Mergesort";
     algoInfos[9].description = "Selection Sort beginnt stets mit dem "
     "ersten Element der Liste. Das Startelement wird als Minimum eingespeichert. "
     "Bei jedem Durchlauf werden alle Elemente der Liste mit dem Minimum verglichen. "
@@ -163,7 +163,7 @@ void initAlgoInfos(AlgoInfo *algoInfos) {
     algoInfos[9].averageCase = "O(n²)";
     algoInfos[9].bestCase = "O(n²)";
     algoInfos[9].stable = "unknown";
-    algoInfos[9].isSelected = false;
+    algoInfos[9].isSelected = true;
 
         // Selectionsort
     algoInfos[10].id = 10;
