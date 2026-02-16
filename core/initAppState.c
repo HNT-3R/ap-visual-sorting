@@ -4,11 +4,15 @@ void initAlgoInfos(AlgoInfo *algoInfos);
 
 void initAppState(AppState* state) {
     
-
+    //Textfeld mit Nullen füllen
     for (int i = 0; i < 8; i++) {
         state->numMaxInput[i] = '0';
     }
-    state->numMaxInput[1] = '\0';
+    //Zeige initial im Textfeld "100"
+    state->numMaxInput[0] = '1';
+    state->numMaxInput[1] = '0';
+    state->numMaxInput[2] = '0';
+    state->numMaxInput[3] = '\0';
     state->letCount = 0;
     state->toDraw = 0;
     state->allDistinct = false;
@@ -20,8 +24,7 @@ void initAppState(AppState* state) {
     state->showSortViewerPage = 0;
     state->nextSortViewerPage = false;
 
-    
-    int algoInfoNum = MAXARNUM;
+    int algoInfoNum = MAXARNUM; //maximale Anzahl Algorithmen
     AlgoInfo *algoInfos = calloc(algoInfoNum, sizeof(AlgoInfo));
     initAlgoInfos(algoInfos);
 
@@ -30,7 +33,7 @@ void initAppState(AppState* state) {
 
 }
 
-
+//Initialisiert alle Algorithmen-Infos für den Auswahlbildschirm
 void initAlgoInfos(AlgoInfo *algoInfos) {
     // Testsort überarbeiten!
     algoInfos[0].id = 0;
