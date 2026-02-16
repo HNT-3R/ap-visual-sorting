@@ -413,21 +413,10 @@ void initSort(MyAlgorithm* algo) {
         case 2: selectionSort(algo, waitTime, &start); break;
         case 3: insertionSort(algo, waitTime, &start); break;
         case 4: bogoSort(algo, waitTime, &start); break;
-<<<<<<< HEAD
-        case 5: quickSortWrapper(algo, waitTime, &start); break;
-        case 6: shellSort(algo, waitTime, &start); break;
-
-
-
-        //hier fehlt code
-        
-        case 7: selectionSort(algo, waitTime, &start); break;
-=======
         case 5: shellSort(algo, waitTime, &start); break;
         case 6: heapSort(algo, waitTime, &start); break;
         case 7: bucketSort(algo, waitTime, &start); break;
->>>>>>> 92e3edd468bd2f6c1f24c6c63a98cc672cea6698
-        case 8: selectionSort(algo, waitTime, &start); break;
+        case 8: quickSortWrapper(algo, waitTime, &start); break;
         case 9: selectionSort(algo, waitTime, &start); break;
         case 10: selectionSort(algo, waitTime, &start); break;
         case 11: selectionSort(algo, waitTime, &start); break;
