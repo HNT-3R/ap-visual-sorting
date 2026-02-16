@@ -337,7 +337,11 @@ void bucketSort(MyAlgorithm* algo, int wait, struct timespec* start) {
 
 }
 
-void quickSort(MyAlgorithm* algo, int* arr, int left, int right, int wait) {
+void quickSort(MyAlgorithm* algo, int* arr, int left, int right, int wait, struct timespec* start) {
+    struct timespec end;
+    clock_gettime(CLOCK_THREAD_CPUTIME_ID, &end);
+    algo->time = (end.tv_sec - start->tv_sec);
+    algo->time += (end.tv_nsec - start->tv_nsec) / 1000000000.0;
     algo->repeats += 1;
     if (left < right) {
         int pivot = arr[right];
@@ -361,23 +365,23 @@ void quickSort(MyAlgorithm* algo, int* arr, int left, int right, int wait) {
         int temp = arr[i + 1];
         arr[i + 1] = arr[right];
         arr[right] = temp;
-        algo->accesses += 3;        
+        algo->accesses += 3;   
+        
         int pivotIndex = i + 1;
         
         
         usleep(wait);
-        quickSort(algo, arr, left, pivotIndex - 1, wait);
-        quickSort(algo, arr, pivotIndex + 1, right, wait);
+        quickSort(algo, arr, left, pivotIndex - 1, wait, start);
+        quickSort(algo, arr, pivotIndex + 1, right, wait, start);
     }
 }
 
 void quickSortWrapper(MyAlgorithm* algo, int wait, struct timespec* start) {
-    struct timespec end;
     List* list = algo->list; 
     int* arr = algo->list->nums;  
     int length = list->absLength; 
     
-    quickSort(algo, arr, 0, length - 1, wait); 
+    quickSort(algo, arr, 0, length - 1, wait, start); 
     
 }
 
