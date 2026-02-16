@@ -57,7 +57,7 @@ void initAlgoInfos(AlgoInfo *algoInfos) {
     algoInfos[1].worstCase = "O(n²)";
     algoInfos[1].averageCase = "O(n²)";
     algoInfos[1].bestCase = "O(n)";
-    algoInfos[1].stable = "unknown";
+    algoInfos[1].stable = "ja";
     algoInfos[1].isSelected = false;
 
     // Selectionsort
@@ -72,7 +72,7 @@ void initAlgoInfos(AlgoInfo *algoInfos) {
     algoInfos[2].worstCase = "O(n²)";
     algoInfos[2].averageCase = "O(n²)";
     algoInfos[2].bestCase = "O(n²)";
-    algoInfos[2].stable = "unknown";
+    algoInfos[2].stable = "nein";
     algoInfos[2].isSelected = false;
 
     // Insertionsort
@@ -96,7 +96,7 @@ void initAlgoInfos(AlgoInfo *algoInfos) {
     "Sortieralgorithmus, basierend auf dem \"Generier und Teste\"-Paradigma. "
     "Die Liste wird vollständig zufällig angeordnet und danach geprüft, ob sie richtig ist.\n"
     "Link: https://www.geeksforgeeks.org/dsa/bogosort-permutation-sort/ ";
-    algoInfos[4].worstCase = "O(?)";
+    algoInfos[4].worstCase = "O(∞)";
     algoInfos[4].averageCase = "O(n*n!)";
     algoInfos[4].bestCase = "O(n)";
     algoInfos[4].stable = "nein";
@@ -119,9 +119,11 @@ void initAlgoInfos(AlgoInfo *algoInfos) {
     "welcher auf dem Binary Heap basiert. Dies ermöglicht den schnellstmöglichen Zugriff auf \n"
     "das größte Element der originalen Liste. Die Funktionsweise ist mit dem\n"
     "Selectionsort zu vergleichen.";
-    algoInfos[6].worstCase = "O(n)";
+    algoInfos[6].worstCase = "O(n log n)";
     algoInfos[6].averageCase = "O(n log n)";
     algoInfos[6].bestCase = "O(n log n)";
+    algoInfos[6].stable = "nein";
+    algoInfos[6].isSelected = false;
 
     // Bucketsort
     algoInfos[7].id = 7;
@@ -147,38 +149,34 @@ void initAlgoInfos(AlgoInfo *algoInfos) {
     algoInfos[8].stable = "nein";
     algoInfos[8].isSelected = true;
 
-
-//hier fehlt code
-
-        // Selectionsort
+    // Mergesort
     algoInfos[9].id = 9;
     algoInfos[9].name = "Mergesort";
-    algoInfos[9].description = "Selection Sort beginnt stets mit dem "
-    "ersten Element der Liste. Das Startelement wird als Minimum eingespeichert. "
-    "Bei jedem Durchlauf werden alle Elemente der Liste mit dem Minimum verglichen. "
-    "Am Ende der Liste angekommen, wird das Minimum am Anfang der Liste platziert und beim "
-    "nächsten Durchlauf aus der Liste ausgelassen.\n"
-    "Link: https://publications.scss.tcd.ie/tech-reports/reports.05/TCD-CS-2005-57.pdf ";
-    algoInfos[9].worstCase = "O(n²)";
-    algoInfos[9].averageCase = "O(n²)";
-    algoInfos[9].bestCase = "O(n²)";
-    algoInfos[9].stable = "unknown";
-    algoInfos[9].isSelected = true;
+    algoInfos[9].description = "Mergesort teilt rekursiv einen Array in einen linken und rechten\n"
+    "Teilarray. Dabei entstehen im niedrigsten Rekusrionsschritt Arrays mit einem Element,\n"
+    "welche anschließend zusammengeführt werden können, wobei die jeweils kleinsten\n"
+    "Elemente miteinander verglichen werden.";
+    algoInfos[9].worstCase = "O(n log n)";
+    algoInfos[9].averageCase = "O(n log n)";
+    algoInfos[9].bestCase = "O(n log n)";
+    algoInfos[9].stable = "ja";
+    algoInfos[9].isSelected = false;
 
-        // Selectionsort
+    // Stalinsort
     algoInfos[10].id = 10;
     algoInfos[10].name = "Stalinsort";
-    algoInfos[10].description = "Selection Sort beginnt stets mit dem "
-    "ersten Element der Liste. Das Startelement wird als Minimum eingespeichert. "
-    "Bei jedem Durchlauf werden alle Elemente der Liste mit dem Minimum verglichen. "
-    "Am Ende der Liste angekommen, wird das Minimum am Anfang der Liste platziert und beim "
-    "nächsten Durchlauf aus der Liste ausgelassen.\n"
-    "Link: https://publications.scss.tcd.ie/tech-reports/reports.05/TCD-CS-2005-57.pdf ";
-    algoInfos[10].worstCase = "O(n²)";
-    algoInfos[10].averageCase = "O(n²)";
-    algoInfos[10].bestCase = "O(n²)";
+    algoInfos[10].description = "Stalinsort durchläuft einmalig einen Array. Dabei wird das aktuelle Element\n"
+    "jeweils immer mit dem folgenden verglichen. Ist ein Folgeelement kleiner als das vorherige Element, wird es\n"
+    "aus dem Array gelöscht. Dadurch ergeben sich zwas extrem schnelle Laufzeiten, jedoch gehen nahezu immer\n"
+    "Elemente verloren.";
+    algoInfos[10].worstCase = "O(n)";
+    algoInfos[10].averageCase = "O(n)";
+    algoInfos[10].bestCase = "O(n)";
     algoInfos[10].stable = "unknown";
     algoInfos[10].isSelected = false;
+
+
+//hier fehlt code
 
         // Selectionsort
     algoInfos[11].id = 11;
