@@ -18,7 +18,7 @@ void createDiagram(Rectangle box, List* list) {
     int blankPixels = (int) box.width % len;
     
     int maxValue = findMax(list->nums, len);
-
+    Color c;    
     
     for(int i = 0; i < len; i++) {
         
@@ -29,16 +29,10 @@ void createDiagram(Rectangle box, List* list) {
         int y = box.y + box.height - barHeight;
         
         
-        if (i == list->index) {
-            DrawRectangle(x, y, barWidth+1, barHeight, RED);
-        } else {
-            DrawRectangle(x, y, barWidth+1, barHeight, LIGHTGRAY);
-        }
-
-        if (list->isFinished) {
-            DrawRectangle(x, y, barWidth+1, barHeight, GRAY); 
-        }
-
+        if (list->isFinished) c = GRAY;
+        else if (i == list->index) c = RED;
+        else c = LIGHTGRAY;
+        DrawRectangle(x, y, barWidth+1, barHeight, c);
     }
     drawOutline(box, 2, SNDCOLOR);
 }
