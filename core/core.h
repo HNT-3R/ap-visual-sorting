@@ -5,9 +5,11 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-#define MAXARNUM 25
-#define CSVNAME "mydata.csv"
+#define MAXARNUM 25 //maximale Anzahl gleichzeitig anzeigbarer Algos
+#define CSVNAME "mydata.csv" //Exportname
 
+//Statische Informationen zu einem Algorithmus
+//Daten für die Startseite und zur Info des Nutzers
 typedef struct {
     unsigned char id;
     bool isSelected;
@@ -19,16 +21,16 @@ typedef struct {
     char* stable;
 } AlgoInfo;
 
-
 typedef struct {
     int dynLength;
     int absLength;
     int *nums;
-    int index;
+    int index; //zur Anzeige in der UI
     bool isFinished;
 } List;
 
-
+//Daten zu einem gewählten Algorithmus
+//Dynamische Anpassung während der Algorithmus läuft
 typedef struct {
     unsigned char id;
     // 0 -> test
@@ -89,7 +91,7 @@ void initAppState(AppState* state);
 void setAllDisctinctSortedAsc(int *p_nums, int max);
 void setRanNumsUnsorted(int *p_nums, int max);
 void setNumsBackwards(int *p_nums, int max);
-void shuffleNums(int *p_nums, int maxIndex);
+void shuffleNums(int *p_nums, int maxIndex);w
 void setSorted(int *p_nums, int maxIndex);
 
 #endif
